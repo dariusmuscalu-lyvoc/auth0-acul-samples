@@ -2,6 +2,7 @@
   "version": 2,
   "buildCommand": "cd react-js && npm run build",
   "outputDirectory": "react-js/dist",
+  "installCommand": "cd react-js && npm install",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -9,26 +10,46 @@
       "source": "/assets/(.*)",
       "headers": [
         {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
         }
       ]
     },
     {
-      "source": "/assets/(.*).js",
+      "source": "/(.*).js",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/javascript"
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     },
     {
-      "source": "/assets/(.*).css",
+      "source": "/(.*).css",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "text/css"
+          "value": "text/css; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }
