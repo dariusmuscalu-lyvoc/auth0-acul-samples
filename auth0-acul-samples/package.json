@@ -5,14 +5,16 @@
   "private": true,
   "scripts": {
     "install:all": "npm install --workspaces",
-    "build:all": "npm run build --workspaces --if-present",
     "test:all": "npm run test --workspaces --if-present",
     "lint:all": "npm run lint --workspaces --if-present",
     "lint:check": "npm run lint:check --workspaces --if-present",
     "clean:all": "npm run clean --workspaces --if-present",
     "validate-manifest": "node scripts/validate-manifest.js",
     "ci": "npm run validate-manifest && npm run lint:check && npm run test:all && npm run build:all",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:all": "cd auth0-acul-samples/react-js && npm run build",
+    "deploy:vercel": "cd auth0-acul-samples && vercel --prod",
+    "postdeploy": "node auth0-acul-samples/scripts/update-auth0-vercel.js"
   },
   "workspaces": [
     "react-js",

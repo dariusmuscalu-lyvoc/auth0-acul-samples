@@ -1,0 +1,58 @@
+name: Preview ACUL Deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 📦 Install and Build
+        run: |
+          npm ci --ignore-scripts
+          cd react-js && npm ci
+          npm run build
+
+      - name: 🚀 Deploy to Vercel (Preview)
+        id: deploy
+        run: |
+          npm install --global vercel@latest
+          DEPLOYMENT_URL=$(vercel deploy --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+
+      - name: 💬 Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🔍 Preview Deployment Ready!
+
+              **Preview URL:** ${{ steps.deploy.outputs.url }}
+              
+              ⚠️ This is a preview deployment. Auth0 is NOT automatically updated for previews.
+              
+              To test this preview:
+              1. Manually update your Auth0 dev tenant to point to the preview URL
+              2. Or wait for the PR to be merged for automatic production deployment
+              
+              ---
+              Preview triggered by: @${{ github.actor }}`
+            })
