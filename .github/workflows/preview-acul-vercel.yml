@@ -23,6 +23,7 @@ jobs:
           node-version: '18'
 
       - name: 📦 Install and Build
+        working-directory: auth0-acul-samples
         run: |
           npm ci --ignore-scripts
           cd react-js && npm ci
@@ -30,6 +31,7 @@ jobs:
 
       - name: 🚀 Deploy to Vercel (Preview)
         id: deploy
+        working-directory: auth0-acul-samples
         run: |
           npm install --global vercel@latest
           DEPLOYMENT_URL=$(vercel deploy --token=${{ secrets.VERCEL_TOKEN }})

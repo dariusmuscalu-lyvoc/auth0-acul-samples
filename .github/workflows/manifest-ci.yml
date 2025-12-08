@@ -4,26 +4,26 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'manifest.json'
-      - 'scripts/validate-manifest.js'
+      - 'auth0-acul-samples/manifest.json'
+      - 'auth0-acul-samples/scripts/validate-manifest.js'
       - '.github/workflows/manifest-ci.yml'
       - '.github/actions/validate-manifest/**'
       # Track React implementations (exclude docs and lock files)
-      - 'react/**'
-      - 'react-js/**'
+      - 'auth0-acul-samples/react/**'
+      - 'auth0-acul-samples/react-js/**'
       - '!**/README.md'
       - '!**/package-lock.json'
       - '!**/.prettierrc.json'
   push:
     branches: [main]
     paths:
-      - 'manifest.json'
-      - 'scripts/validate-manifest.js'
+      - 'auth0-acul-samples/manifest.json'
+      - 'auth0-acul-samples/scripts/validate-manifest.js'
       - '.github/workflows/manifest-ci.yml'
       - '.github/actions/validate-manifest/**'
       # Track React implementations (exclude docs and lock files)
-      - 'react/**'
-      - 'react-js/**'
+      - 'auth0-acul-samples/react/**'
+      - 'auth0-acul-samples/react-js/**'
       - '!**/README.md'
       - '!**/package-lock.json'
       - '!**/.prettierrc.json'
@@ -43,7 +43,5 @@ jobs:
           node-version: '22'
           
       - name: Validate manifest
-        uses: ./.github/actions/validate-manifest
-        with:
-          manifest-path: './manifest.json'
-          strict-mode: 'true'
+        working-directory: auth0-acul-samples
+        run: node scripts/validate-manifest.js

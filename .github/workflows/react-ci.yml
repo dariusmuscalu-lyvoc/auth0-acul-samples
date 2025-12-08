@@ -4,12 +4,12 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "react/**"
+      - "auth0-acul-samples/react/**"
       - ".github/workflows/react-ci.yml"
   push:
     branches: [main]
     paths:
-      - "react/**"
+      - "auth0-acul-samples/react/**"
       - ".github/workflows/react-ci.yml"
 
 jobs:
@@ -27,21 +27,21 @@ jobs:
           node-version: "22"
 
       - name: Install dependencies
-        working-directory: react
+        working-directory: auth0-acul-samples/react
         run: npm ci
 
       - name: Lint check
-        working-directory: react
+        working-directory: auth0-acul-samples/react
         run: npm run lint:check
 
       - name: Type check
-        working-directory: react
+        working-directory: auth0-acul-samples/react
         run: npx tsc --noEmit
 
       - name: Run tests
-        working-directory: react
+        working-directory: auth0-acul-samples/react
         run: npm test -- --coverage --watchAll=false
 
       - name: Build
-        working-directory: react
+        working-directory: auth0-acul-samples/react
         run: npm run build
