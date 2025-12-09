@@ -30,6 +30,10 @@ jobs:
         working-directory: auth0-acul-samples/react-js
         run: npm ci
 
+      - name: 🧹 Clean dist folder
+        working-directory: auth0-acul-samples/react-js
+        run: rm -rf dist
+
       - name: 🏗️ Build ACUL assets
         working-directory: auth0-acul-samples/react-js
         run: npm run build
