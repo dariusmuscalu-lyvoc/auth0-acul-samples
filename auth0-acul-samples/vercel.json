@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "cd react-js && npm run build",
-  "outputDirectory": "react-js/dist",
-  "installCommand": "cd react-js && npm install",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
