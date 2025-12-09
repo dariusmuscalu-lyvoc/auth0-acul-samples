@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "cd react-js && npm install && npm run build",
+  "buildCommand": "echo 'Using pre-built assets'",
   "outputDirectory": "react-js/dist",
+  "installCommand": "echo 'Dependencies already installed'",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -13,16 +14,12 @@
           "value": "*"
         },
         {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        },
-        {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
+          "value": "GET, OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type, Accept, Origin, Authorization, X-CSRF-Token, Accept-Version, Content-Length, Content-MD5, Date"
+          "value": "Content-Type, Authorization"
         }
       ]
     },
@@ -32,24 +29,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/(.*).css",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/css; charset=utf-8"
         }
       ]
     }
