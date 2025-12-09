@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm run build --workspace=react-js",
+  "buildCommand": "cd react-js && npm install && npm run build",
   "outputDirectory": "react-js/dist",
-  "installCommand": "npm install --workspace=react-js",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
