@@ -80,13 +80,19 @@ jobs:
           echo "Vercel config:"
           cat auth0-acul-samples/react-js/dist/vercel.json
 
+      - name: 📁 Prepare clean deployment directory
+        run: |
+          mkdir -p deploy-temp
+          cp -r auth0-acul-samples/react-js/dist/* deploy-temp/
+          echo "Clean deployment directory created"
+
       - name: 🚀 Install Vercel CLI
         run: npm install --global vercel@latest
 
       - name: 🚢 Deploy to Vercel
         id: deploy
         run: |
-          cd auth0-acul-samples/react-js/dist
+          cd deploy-temp
           DEPLOYMENT_URL=$(vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }})
           echo "Deployed to: $DEPLOYMENT_URL"
           echo "url=https://auth0-acul-samples.vercel.app" >> $GITHUB_OUTPUT
