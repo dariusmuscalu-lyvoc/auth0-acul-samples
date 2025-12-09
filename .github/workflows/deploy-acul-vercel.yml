@@ -34,13 +34,6 @@ jobs:
         working-directory: auth0-acul-samples/react-js
         run: npm run build
 
-      - name: 📋 List built assets
-        run: |
-          echo "Built assets:"
-          ls -lah auth0-acul-samples/react-js/dist/assets/
-          echo "Vercel config:"
-          cat auth0-acul-samples/react-js/dist/vercel.json
-
       - name: 📄 Create vercel.json in dist folder
         run: |
           cat > auth0-acul-samples/react-js/dist/vercel.json << 'EOF'
@@ -77,6 +70,13 @@ jobs:
             ]
           }
           EOF
+
+      - name: 📋 List built assets
+        run: |
+          echo "Built assets:"
+          ls -lah auth0-acul-samples/react-js/dist/assets/
+          echo "Vercel config:"
+          cat auth0-acul-samples/react-js/dist/vercel.json
 
       - name: 🚀 Install Vercel CLI
         run: npm install --global vercel@latest
